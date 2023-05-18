@@ -10,7 +10,8 @@ class EmployeeBloc extends Bloc<EmployeeEvent,EmployeeState>
   EmployeeBloc({required this.employeeRepository}) : super(EmployeeLoadingState())
   {
     on<EmployeeEvent>((event, emit) async{
-
+      if(event is LoadEmployeeEvent)
+      {
         emit(EmployeeLoadingState());
         try
         {
@@ -21,6 +22,7 @@ class EmployeeBloc extends Bloc<EmployeeEvent,EmployeeState>
         {
           emit(EmployeeErrorState(error: e.toString()));
         }
+      }
 
 
     });
